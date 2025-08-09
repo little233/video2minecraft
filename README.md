@@ -36,15 +36,13 @@
 pip install Pillow tqdm requests
 ```
 ```bash
-python video_to_mc.py 你的视频文件.mp4
+python video_to_mc.py 你的视频文件.mp4 datapacksname
 ```
 程序会自动：
 
 拆分视频帧（默认 20 FPS）。
 
 自适应缩放到 Minecraft 合理分辨率，保持比例。
-
-量化颜色到最多 32 色。
 
 生成 mc_commands.mcfunction 指令文件。
 
