@@ -47,7 +47,7 @@ python video_to_mc.py 你的视频文件.mp4 datapacksname
 
 自适应缩放到 Minecraft 合理分辨率，保持比例。
 
-生成 mc_commands.mcfunction 指令文件。
+生成 mc的mcfunction 指令文件。
 
 数据包结构示例
 你需要把生成的 .mcfunction 文件放到数据包的合适路径，例如：
