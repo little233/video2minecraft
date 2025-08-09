@@ -27,7 +27,7 @@ import requests
 FFMPEG_FPS = 20
 
 # 最大宽度（按视频宽度等比例缩放到这个宽度）
-MAX_WIDTH = 640  # 想更清晰可以改为 1280或 1920，但性能/粒子/内存需求就更多
+MAX_WIDTH = 640  # 想更清晰可以改为 1280或 1920，但性能/粒子更多
 
 # 颜色量化（设为 256 或 None 表示不过量化）
 MAX_COLORS = 256
@@ -35,7 +35,7 @@ MAX_COLORS = 256
 # ParticleEx 参数（按需修改）
 PARTICLE = 'minecraft:end_rod'
 ANCHOR_POS = '~ ~1 ~'
-SCALE = 0.1
+SCALE = 0.8
 DPB = 10.0
 LIFETIME_TICK = 2
 GROUP = 'null'
@@ -58,6 +58,7 @@ FFMPEG_URL = {
     'Linux':   'https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz',
     'Darwin':  'https://evermeet.cx/ffmpeg/ffmpeg.zip'
 }
+
 
 def get_ffmpeg() -> str:
     """优先使用当前目录的 ffmpeg，其次用户指定，其次系统 PATH，否则下载解压并返回可执行路径。"""
@@ -128,7 +129,7 @@ def probe_video_resolution(video: str, ffmpeg_cmd: str) -> tuple[int,int]:
                         return width, height
     return 1920, 1080
 
-def extract_frames_and_scale(video: str, out_dir: str, ffmpeg_cmd: str):
+def extract_frames_and_scale(video: str, out_dir: str, ffmpeg_cmd: str, datapack_name='videopack'):
     """使用 ffmpeg 拆帧并在输出时做 scale 保证画质与宽高比"""
     if os.path.exists(out_dir):
         shutil.rmtree(out_dir)
@@ -148,7 +149,7 @@ def extract_frames_and_scale(video: str, out_dir: str, ffmpeg_cmd: str):
         ffmpeg_cmd, '-i', video,
         '-vf', f'fps={FFMPEG_FPS},scale={target_w}:{target_h}',
         '-vsync', '0',
-        os.path.join(out_dir, f'{DEFAULT_DATAPACK_NAME}_%06d.png')
+        os.path.join(out_dir, f'{datapack_name}_%06d.png')
     ]
     print('执行拆帧：', ' '.join(cmd))
     subprocess.run(cmd, check=True)
@@ -188,7 +189,7 @@ def build_datapack(out_dir: str, datapack_name: str):
 
     # main.mcfunction
     with open(os.path.join(func_dir, 'main.mcfunction'), 'w', encoding='utf-8') as f:
-        f.write(f'function {datapack_name}:frame_0\n')
+        f.write(f'function {datapack_name}:{datapack_name}\n')
 
     # per-frame functions
     for i, src in enumerate(tqdm(pngs, desc='生成 mcfunction 并复制图片')):
@@ -205,7 +206,7 @@ def build_datapack(out_dir: str, datapack_name: str):
             mf.write(f'execute positioned ~ ~ ~ run {cmd}\n')
             # 调度下一帧（如果存在）
             if i + 1 < len(pngs):
-                mf.write(f'schedule function {datapack_name}:frame_{i+1} 1t\n')
+                mf.write(f'schedule function {datapack_name}:{datapack_name}_{i+1} 1t\n')
 
     # 打包 zip
     zipname = f'{datapack_name}.zip'
@@ -225,7 +226,7 @@ def build_datapack(out_dir: str, datapack_name: str):
 
 def main():
     if len(sys.argv) < 2:
-        print('用法: python video2mc_datapack.py input.mp4 [datapack_name]')
+        print('用法: python video_to_mc.py input.mp4 [datapack_name]')
         sys.exit(1)
 
     video = sys.argv[1]
@@ -237,12 +238,11 @@ def main():
     ffmpeg_cmd = get_ffmpeg()
     print('使用 ffmpeg:', ffmpeg_cmd)
     frames_dir = 'frames'
-    extract_frames_and_scale(video, frames_dir, ffmpeg_cmd)
+    extract_frames_and_scale(video, frames_dir, ffmpeg_cmd,datapack_name)
     post_process_images(frames_dir)
     build_datapack(frames_dir, datapack_name)
     print('完成。')
 
+
 if __name__ == '__main__':
     main()
-
-
