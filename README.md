@@ -36,7 +36,7 @@
 pip install Pillow tqdm requests
 ```
 ```bash
-python video2mc_particle.py 你的视频文件.mp4
+python video_to_mc.py 你的视频文件.mp4
 ```
 程序会自动：
 
