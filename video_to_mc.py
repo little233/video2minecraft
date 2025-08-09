@@ -35,7 +35,7 @@ MAX_COLORS = 256
 # ParticleEx 参数（按需修改）
 PARTICLE = 'minecraft:end_rod'
 ANCHOR_POS = '~ ~1 ~'
-SCALE = 0.8
+SCALE = 0.1
 DPB = 10.0
 LIFETIME_TICK = 2
 GROUP = 'null'
@@ -189,7 +189,7 @@ def build_datapack(out_dir: str, datapack_name: str):
 
     # main.mcfunction
     with open(os.path.join(func_dir, 'main.mcfunction'), 'w', encoding='utf-8') as f:
-        f.write(f'function {datapack_name}:{datapack_name}\n')
+        f.write(f'function {datapack_name}:{datapack_name}_0\n')
 
     # per-frame functions
     for i, src in enumerate(tqdm(pngs, desc='生成 mcfunction 并复制图片')):
@@ -246,3 +246,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
