@@ -35,7 +35,7 @@ MAX_COLORS = 256
 # ParticleEx 参数（按需修改）
 PARTICLE = 'minecraft:end_rod'
 ANCHOR_POS = '~ ~1 ~'
-SCALE = 0.1
+SCALE = 0.3
 DPB = 10.0
 LIFETIME_TICK = 2
 GROUP = 'null'
@@ -197,7 +197,7 @@ def build_datapack(out_dir: str, datapack_name: str):
         target = os.path.join(PARTICLEEX_IMG_DIR, name)
         shutil.copy2(src, target)  # 复制到 ParticleEx 指定目录
 
-        mcpath = os.path.join(func_dir, f'{DEFAULT_DATAPACK_NAME}_{i}.mcfunction')
+        mcpath = os.path.join(func_dir, f'{datapack_name}_{i}.mcfunction')
         with open(mcpath, 'w', encoding='utf-8') as mf:
             # 注意：particleex image <particle> <pos> <imagename> <scale> ...
             # 这里使用 imagename（模组会在它自己的图片目录下寻找）
@@ -246,4 +246,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
