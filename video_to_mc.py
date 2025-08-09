@@ -27,7 +27,7 @@ import requests
 FFMPEG_FPS = 20
 
 # 最大宽度（按视频宽度等比例缩放到这个宽度）
-MAX_WIDTH = 1280  # 想更清晰可以改为 1280或 1920，但性能/粒子更多
+MAX_WIDTH = 640  # 想更清晰可以改为 1280或 1920，但性能/粒子更多
 
 # 颜色量化（设为 256 或 None 表示不过量化）
 MAX_COLORS = 256
@@ -244,3 +244,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
