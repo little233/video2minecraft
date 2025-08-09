@@ -35,7 +35,10 @@
 ```bash
 pip install Pillow tqdm requests
 ```
+使用方式
+
 ```bash
+#请注意修改文件中的图片保存路径
 python video_to_mc.py 你的视频文件.mp4 datapacksname
 ```
 程序会自动：
