@@ -27,7 +27,7 @@ import requests
 FFMPEG_FPS = 20
 
 # 最大宽度（按视频宽度等比例缩放到这个宽度）
-MAX_WIDTH = 1920  # 想更清晰可以改为 1280或 1920，但性能/粒子更多
+MAX_WIDTH = 1280  # 想更清晰可以改为 1280或 1920，但性能/粒子更多
 
 # 颜色量化（设为 256 或 None 表示不过量化）
 MAX_COLORS = 256
@@ -148,7 +148,7 @@ def extract_frames_and_scale(video: str, out_dir: str, ffmpeg_cmd: str):
         ffmpeg_cmd, '-i', video,
         '-vf', f'fps={FFMPEG_FPS},scale={target_w}:{target_h}',
         '-vsync', '0',
-        os.path.join(out_dir, 'frame_%06d.png')
+        os.path.join(out_dir, f'{DEFAULT_DATAPACK_NAME}_%06d.png')
     ]
     print('执行拆帧：', ' '.join(cmd))
     subprocess.run(cmd, check=True)
@@ -196,7 +196,7 @@ def build_datapack(out_dir: str, datapack_name: str):
         target = os.path.join(PARTICLEEX_IMG_DIR, name)
         shutil.copy2(src, target)  # 复制到 ParticleEx 指定目录
 
-        mcpath = os.path.join(func_dir, f'frame_{i}.mcfunction')
+        mcpath = os.path.join(func_dir, f'{DEFAULT_DATAPACK_NAME}_{i}.mcfunction')
         with open(mcpath, 'w', encoding='utf-8') as mf:
             # 注意：particleex image <particle> <pos> <imagename> <scale> ...
             # 这里使用 imagename（模组会在它自己的图片目录下寻找）
@@ -220,7 +220,7 @@ def build_datapack(out_dir: str, datapack_name: str):
 
     print('数据包已生成：', dp_root)
     print('ZIP 文件：', zipname)
-    print('PNG 已复制到 ParticleEx 图片目录：', PARTICLEEX_IMG_DIR)
+    print('PNG 已复制到 图片目录：', PARTICLEEX_IMG_DIR)
     print('将 ZIP 或文件夹放入 <存档>/datapacks/，进游戏 /reload，然后 /function {0}:main'.format(datapack_name))
 
 def main():
