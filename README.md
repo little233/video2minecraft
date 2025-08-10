@@ -99,3 +99,7 @@ videopack/
 如需调整粒子效果、颜色或大小，请修改脚本中的相关参数。
 
 脚本会自动下载并解压 ffmpeg（如果系统中未安装），无需额外配置。
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
