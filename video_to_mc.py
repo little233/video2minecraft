@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-video2mc_datapack.py
+video2mc_datapack
 视频 -> PNG 帧 -> particleex mcfunctions -> Minecraft 数据包（zip）
 特性：
  - 自适应高画质（按视频宽度缩放到 MAX_WIDTH，保持宽高比）
@@ -13,7 +13,7 @@ video2mc_datapack.py
  - 自动打包成 zip
 依赖: pip install tqdm pillow requests
 用法:
- python video2mc_datapack.py input.mp4 [datapack_name]
+ python video_to_mc.py input.mp4 [datapack_name]
 """
 
 from __future__ import annotations
@@ -246,6 +246,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
 
 
