@@ -27,17 +27,17 @@ import requests
 FFMPEG_FPS = 20
 
 # 最大宽度（按视频宽度等比例缩放到这个宽度）
-MAX_WIDTH = 640  # 想更清晰可以改为 1280或 1920，但性能/粒子更多
+MAX_WIDTH = 640  # 想更清晰可以改为 1280或 1920，但粒子越多需要的性能就更多，模组不太推荐超过1000*1000
 
 # 颜色量化（设为 256 或 None 表示不过量化）
 MAX_COLORS = 256
 
 # ParticleEx 参数（按需修改）
 PARTICLE = 'minecraft:end_rod'
-ANCHOR_POS = '~ ~1 ~'
-SCALE = 0.3
+ANCHOR_POS = '~ ~1 ~' #播放坐标
+SCALE = 0.3 #缩放比例，
 DPB = 10.0
-LIFETIME_TICK = 2
+LIFETIME_TICK = 2 #存活时间，以MC的20游戏刻为基础
 GROUP = 'null'
 
 # 数据包默认命名空间（可由命令行覆盖）
@@ -246,5 +246,6 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
 
