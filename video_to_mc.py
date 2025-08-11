@@ -92,7 +92,7 @@ def get_ffmpeg() -> str:
         with tqdm.wrapattr(open(local_archive, 'wb'), 'write', total=total, desc='下载 ffmpeg') as f:
             shutil.copyfileobj(r.raw, f)
     # 解压
-    tmpdir = 'ffmpeg_temp'
+    tmpdir = 'ffmpeg'
     os.makedirs(tmpdir, exist_ok=True)
     if local_archive.endswith('.zip'):
         import zipfile
@@ -246,6 +246,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
 
 
