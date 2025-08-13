@@ -6,7 +6,7 @@
 
 ## 项目介绍
 
-本项目基于 Python，通过 FFmpeg 拆解视频帧，并利用 Pillow 进行图片缩放和色彩量化，最终生成符合 Minecraft datapack 规范的 `.mcfunction` 指令文件，结合 particleex 插件可实现视频粒子动画播放。
+本项目基于 Python，通过 FFmpeg 拆解视频帧，图片缩放和色彩量化，最终生成符合 Minecraft datapack 规范的 `.mcfunction` 指令文件，结合 particleex 插件可实现视频粒子动画播放。
 
 ---
 
@@ -26,14 +26,13 @@
 - Python 3.6+
 - [FFmpeg](https://ffmpeg.org/)（自动下载或手动配置路径）
 - Python 库：
-  - `Pillow`
   - `tqdm`
   - `requests`
 
 可通过以下命令安装依赖：
 
 ```bash
-pip install Pillow tqdm requests
+pip install tqdm requests
 ```
 使用方式
 
@@ -49,9 +48,10 @@ python video_to_mc.py 你的视频文件.mp4 datapacksname
 
 生成 mc的mcfunction 指令文件。
 
-数据包结构示例
-你需要把生成的 .mcfunction 文件放到数据包的合适路径，例如：
 
+自动把生成的 .mcfunction 文件生成数据包
+但是生成好的数据包需要你放到存档里面去
+数据包结构示例
 ```bash
 
 videopack/
