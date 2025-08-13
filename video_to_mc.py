@@ -37,7 +37,7 @@ PARTICLE = 'minecraft:end_rod'
 ANCHOR_POS = '~ ~1 ~' #播放坐标
 SCALE = 0.3 #缩放比例，
 DPB = 10.0
-LIFETIME_TICK = 2 #存活时间，以MC的20游戏刻为基础
+LIFETIME_TICK = 1 #存活时间，以MC的20游戏刻为基础
 GROUP = 'null'
 
 # 数据包默认命名空间（可由命令行覆盖）
@@ -246,6 +246,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
 
 
